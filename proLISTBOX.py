@@ -73,7 +73,7 @@ def studinsert():
     cur.execute("select name from student")
     row=cur.fetchall()
     for rows in row:
-        list1.insert(END,rows)
+        list1.insert(END,rows[0])
     con.commit()
     cur.close()
     con.close()
@@ -116,13 +116,18 @@ def viewrecords():
         nm=list1.get(select[0])
         con=sq.connect("STUD.db")
         cur=con.cursor()
-        cur.execute("select * from student where name=?",(nm))
+        cur.execute("select * from student where name=?",(nm,))
         row=cur.fetchall()
+
+        for item in tree.get_children():
+            tree.delete(item)
+
         for rows in row:
             tree.insert("",END,values=rows)
         con.commit()
         cur.close()
         con.close()
+        
 
 
 

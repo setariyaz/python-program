@@ -4,6 +4,14 @@ from tkinter import ttk
 from tkinter import messagebox
 root=Tk()
 root.title("COLLAGE WORK")
+
+def init():
+    con=sq.connect("MY.db")
+    cur=con.cursor()
+    cur.execute("create table if not exists stud(id integer primary key autoincrement,name text,city text)")
+    cur.close()
+    con.close()
+init()
 frame=LabelFrame(root,text="For Record Insert",height=400,width=600)
 frame.pack(pady=10)
 
